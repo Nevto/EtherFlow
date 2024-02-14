@@ -1,13 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="app.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.5.0/web3.min.js" integrity="sha512-gnEwP99TSWkX4Bb4WWg6QsfAjU2BzxcCGm/xVmGxAM5zdSC+cPYyuv2B5IlaX8tb4tGnu7VJhlPj1rU0TqUlZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.5.0/web3.min.js"
+        integrity="sha512-gnEwP99TSWkX4Bb4WWg6QsfAjU2BzxcCGm/xVmGxAM5zdSC+cPYyuv2B5IlaX8tb4tGnu7VJhlPj1rU0TqUlZA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>EtherFlow</title>
 </head>
+
 <body>
-    
+    <header>
+        <h1>EtherFlow</h1>
+    </header>
+
+
+    <section>
+        <div>
+            <h3>What's inside of your wallet?</h3>
+            <form action="" id="getBalance">
+                <input type="text" placeholder="0xAbCdEf1234567890GhIjKlMnOpQrStUvWxYz">
+                <button type="submit">Check Balance</button>
+            </form>
+
+            <div>
+                <span id="walletBalance">Amount will pop up here</span>
+            </div>
+
+            <form action="" id="sendTransaction">
+                <input type="text" placeholder="Enter Amount to send">
+                <button type="submit">Send Transaction</button>
+            </form>
+
+            <form action="" id="showAllTransactions">
+                <input type="text" placeholder="Show All Transactions">
+                <button type="submit">Show Everything</button>
+            </form>
+
+            <div id="containerTransactions">
+                <section id="allTransactions">
+
+                </section>
+            </div>
+
+
+        </div>
+    </section>
 </body>
+
 </html>
