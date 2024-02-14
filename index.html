@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="main.css">
     <script src="app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.5.0/web3.min.js"
         integrity="sha512-gnEwP99TSWkX4Bb4WWg6QsfAjU2BzxcCGm/xVmGxAM5zdSC+cPYyuv2B5IlaX8tb4tGnu7VJhlPj1rU0TqUlZA=="
@@ -12,13 +14,12 @@
 </head>
 
 <body>
-    <header>
+    <header class="header">
         <h1>EtherFlow</h1>
     </header>
-
-
-    <section>
-        <div>
+    
+    <section class="container">
+        <div class="formContainer">
             <h3>What's inside of your wallet?</h3>
             <form action="" id="getBalance">
                 <input type="text" placeholder="0xAbCdEf1234567890GhIjKlMnOpQrStUvWxYz">
@@ -26,7 +27,7 @@
             </form>
 
             <div>
-                <span id="walletBalance">Amount will pop up here</span>
+                <span id="walletBalance"></span>
             </div>
 
             <form action="" id="sendTransaction">
@@ -44,7 +45,6 @@
 
                 </section>
             </div>
-
 
         </div>
     </section>
