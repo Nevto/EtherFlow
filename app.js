@@ -1,4 +1,5 @@
 import HttpClient from "./http.js"
+import { refreshPage } from "./refresh.js"
 
 const getBalance = document.querySelector('#getBalance')
 const checkBalanceButton = document.querySelector('#balanceButton')
@@ -8,6 +9,7 @@ const toAdress = document.querySelector('#toWallet')
 const sendTrxButton = document.querySelector('#sendTrxButton')
 const showEveryTransaction = document.querySelector('#showAllTransactions')
 const showEverythingButton = document.querySelector('#showEverythingButton')
+const resetPage = document.querySelector('.header')
 
 
 const apiKey = 'UEVD894TAHT8V6H8P2AVX26ITZ6R1D6XRM'
@@ -34,13 +36,11 @@ const loadBalance = async () => {
             params:[getBalance.value, 'latest']
         })
         
-        
-        console.log(balance);
         //Converts the result to show only 3 decimals
         const parseBalance = Math.floor(parseInt(balance) / Math.pow(10,15)) / 1000
         showMyBalance.innerText = parseBalance + ' Eth';
     } else {
-        console.log("You appear to be empty of eth");
+        console.log("You appear to be out of eth");
     }
 }
 
@@ -65,8 +65,7 @@ const sendTrx = async () => {
             }]
             
         });
-        console.log('Congratulations! your transaction is done', sendTransaction);
-        location.reload();
+        refreshPage()
     } catch (error) {
         console.error('Something went wrong with the transaction:', error);
     }
@@ -76,11 +75,8 @@ const sendTrx = async () => {
 const showAllTransactions = async () => {
     const address = showEveryTransaction.value
 
-
     try {
         const transactions = await httpClient.getTransactions(address)
-        // const parsedValue = transaction.value
-        // console.log(parsedValue);
         const container = document.querySelector('#containerTransactions')
         const section = document.createElement('section')
 
@@ -95,13 +91,13 @@ const showAllTransactions = async () => {
             span.appendChild(ethLogo)
             section.appendChild(span)
             container.appendChild(section)
-            console.log(parsedValue);
         })
     } catch (error) {
         console.error('Error:', error)
     }
 }
 
+resetPage.addEventListener('click', refreshPage)
 showEverythingButton.addEventListener('click', showAllTransactions)
 checkBalanceButton.addEventListener('click', loadBalance)
 sendTrxButton.addEventListener('click', sendTrx)

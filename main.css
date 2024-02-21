@@ -5,6 +5,7 @@
     height: 100vh;
     flex-direction: column;
     background: linear-gradient(45deg, #1a1a1a, #9933cc, #2c2c2c);
+    overflow: hidden;
 }
 
 .formContainer {
@@ -21,8 +22,11 @@
     background-color: #161616;
     color: #b366ff;
     position: fixed;
+    cursor: pointer;
     width: 100%;
+    font-family: 'Montserrat', sans-serif;
 }
+
 
 h1, h3 {
     display: flex;
@@ -36,15 +40,15 @@ h1, h3 {
     margin-top: 20px;
 }
 
+
 .transactions {
     background-color: white;
     border-radius: 15px;
-    width: 80vw;
+    width: fit-content;
     height: 40vh;
     overflow-y: auto;
     margin: 10px;
     border: 5px solid #2c2c2c;
-    flex-direction: column-reverse;
 }
 
 .transactions::-webkit-scrollbar {
@@ -75,6 +79,7 @@ button {
     background: linear-gradient(45deg, #2c2c2c, #1a1a1a, #9933cc, #2c2c2c);
     color: white;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 input {
@@ -93,4 +98,15 @@ input::placeholder {
 
 #showAllTransactions {
     background: linear-gradient(45deg, #2c2c2c, #1a1a1a, #9933cc, #2c2c2c);
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+@media screen and (max-width: 680px) {
+    .transactions {
+        width: 90vw; 
+        height: 30vh;
+    }
 }
