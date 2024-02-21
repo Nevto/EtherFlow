@@ -24,31 +24,42 @@ function initApp() {
             e.preventDefault();
         })
     })
-} 
-const loadBalance = async () => {
+}
+export const fetchBalance = async () => {
     if (typeof ethereum !== undefined) {
         account = await ethereum.request({
             method: 'eth_requestAccounts'
         })
-
         const balance = await ethereum.request({
             method: 'eth_getBalance',
-            params:[getBalance.value, 'latest']
+            params: [getBalance.value, 'latest']
         })
-        
         //Converts the result to show only 3 decimals
-        const parseBalance = Math.floor(parseInt(balance) / Math.pow(10,15)) / 1000
-        showMyBalance.innerText = parseBalance + ' Eth';
+        return Math.floor(parseInt(balance) / Math.pow(10, 15)) / 1000
     } else {
-        console.log("You appear to be out of eth");
+        throw new Error("Eth not available")
     }
 }
 
-const sendTrx = async () => {
+export const updateDOMBalance = (balance) => {
+    if (balance !== null) {
+        showMyBalance.innerText = balance + ' Eth';
+    }
+};
+
+export const loadBalance = async () => {
+    try {
+        const balance = await fetchBalance();
+        updateDOMBalance(balance);
+    } catch (error) {
+        console.error('Cant fecth balance:', error.message)
+    }
+};
+
+export const sendTrx = async () => {
     const toWallet = toAdress.value;
     const fromWallet = getBalance.value;
     const amount = parseFloat(sendAmount.value) * Math.pow(10, 18)
-
     try {
         // Fetch Current gasprice
         const gasPrice = await ethereum.request({
@@ -63,7 +74,6 @@ const sendTrx = async () => {
                 // Pay current gasPrice to stay competetive
                 gasPrice: gasPrice
             }]
-            
         });
         refreshPage()
     } catch (error) {
@@ -86,8 +96,8 @@ const showAllTransactions = async () => {
             const ethLogo = document.createElement('i')
             ethLogo.classList.add('fab', 'fa-ethereum');
             section.classList.add('transactions')
-            const parsedValue = Math.floor(parseInt(transaction.value) / Math.pow(10,15)) / 1000
-            span.textContent= `Tx Hash: ${transaction.hash}, Block Number: ${transaction.blockNumber}, Transaction value: ${parsedValue} Eth`
+            const parsedValue = Math.floor(parseInt(transaction.value) / Math.pow(10, 15)) / 1000
+            span.textContent = `Tx Hash: ${transaction.hash}, Block Number: ${transaction.blockNumber}, Transaction value: ${parsedValue} Eth`
             span.appendChild(ethLogo)
             section.appendChild(span)
             container.appendChild(section)
